@@ -1,6 +1,5 @@
 package kr.co.fascampus.eatgo.domain;
 
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
