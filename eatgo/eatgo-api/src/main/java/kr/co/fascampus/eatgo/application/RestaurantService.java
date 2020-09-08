@@ -5,6 +5,7 @@ import kr.co.fascampus.eatgo.domain.MenuItemRepository;
 import kr.co.fascampus.eatgo.domain.Restaurant;
 import kr.co.fascampus.eatgo.domain.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class RestaurantService {
     }
 
     public Restaurant getRestaurant(Long id){
-        Restaurant restaurant = restaurantRepository.findById(id);
+        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
 
         List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
         restaurant.setMenuItems(menuItems);
@@ -36,5 +37,9 @@ public class RestaurantService {
         List<Restaurant> restaurants = restaurantRepository.findAll();
 
          return restaurants;
+    }
+
+    public Restaurant addRestaurant(Restaurant restaurant) {
+        return restaurantRepository.save(restaurant);
     }
 }
