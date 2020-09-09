@@ -1,10 +1,16 @@
 package kr.co.fascampus.eatgo.domain;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MenuItem {
 
     @Id
@@ -14,25 +20,4 @@ public class MenuItem {
     private Long restaurantId;
 
     private String name;
-
-    public MenuItem(String name) {
-        this.name = name;
-    }
-
-    public MenuItem() {
-
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Id
-    public Long getId() {
-        return id;
-    }
 }

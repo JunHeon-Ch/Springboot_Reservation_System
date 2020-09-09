@@ -37,18 +37,33 @@ public class RestaurantServiceTest {
 
     private void mockMenuItemRepository() {
         List<MenuItem> menuItems = new ArrayList<>();
-        menuItems.add(new MenuItem("Kimchi"));
+        menuItems.add(MenuItem.builder()
+                        .name("Kimchi")
+                        .build());
 
         given(menuItemRepository.findAllByRestaurantId(1004L)).willReturn(menuItems);
     }
 
     private void mockRestaurantRepository() {
         List<Restaurant> restaurants = new ArrayList<>();
-        Restaurant restaurant = new Restaurant(1004L, "Bob zip", "Seoul");
+        Restaurant restaurant = Restaurant.builder()
+                .id(1004L)
+                .name("Bob zip")
+                .address("Seoul")
+                .build();
         restaurants.add(restaurant);
+
         given(restaurantRepository.findAll()).willReturn(restaurants);
 
         given(restaurantRepository.findById(1004L)).willReturn(Optional.of(restaurant));
+    }
+
+    @Test
+    public void getRestaurants() {
+        List<Restaurant> restaurants = restaurantService.getRestaurants();
+
+        Restaurant restaurant = restaurants.get(0);
+        assertThat(restaurant.getId(), is(1004L));
     }
 
     @Test
@@ -62,22 +77,35 @@ public class RestaurantServiceTest {
     }
 
     @Test
-    public void getRestaurants() {
-        List<Restaurant> restaurants = restaurantService.getRestaurants();
+    public void addRestaurant() {
+        given(restaurantRepository.save(any())).will(invocation -> {
+            Restaurant restaurant = invocation.getArgument(0);
+            restaurant.setId(1234L);
+            return restaurant;
+        });
 
-        Restaurant restaurant = restaurants.get(0);
-        assertThat(restaurant.getId(), is(1004L));
+        Restaurant restaurant = Restaurant.builder()
+                .name("BeRyong")
+                .address("Seoul")
+                .build();
+
+        Restaurant created = restaurantService.addRestaurant(restaurant);
+
+        assertThat(created.getId(), is(1234L));
     }
 
     @Test
-    public void addRestaurant() {
-        Restaurant restaraunt = new Restaurant("BeRyong", "Seoul");
-        Restaurant saved = new Restaurant(1234L, "BeRyong", "Seoul");
+    public void update(){
+        Restaurant restaurant = Restaurant.builder()
+                .id(1004L)
+                .name("Bob zip")
+                .address("Seoul")
+                .build();
 
-        given(restaurantRepository.save(any())).willReturn(saved);
+        given(restaurantRepository.findById(1004L)).willReturn(Optional.of(restaurant));
+        restaurantService.updateRestaurant(1004L, "Sool zip", "Busan");
 
-        Restaurant created = restaurantService.addRestaurant(restaraunt);
-
-        assertThat(created.getId(), is(1234L));
+        assertThat(restaurant.getName(), is("Sool zip"));
+        assertThat(restaurant.getAddress(), is("Busan"));
     }
 }
