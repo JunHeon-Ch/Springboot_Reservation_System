@@ -17,6 +17,7 @@ public class MenuItem {
     @GeneratedValue
     private Long id;
 
+    @Setter
     private Long restaurantId;
 
     private String name;

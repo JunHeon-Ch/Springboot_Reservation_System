@@ -15,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
-public class RestaurantServiceTest {
+public class RestaurantServiceTests {
 
     private RestaurantService restaurantService;
 
