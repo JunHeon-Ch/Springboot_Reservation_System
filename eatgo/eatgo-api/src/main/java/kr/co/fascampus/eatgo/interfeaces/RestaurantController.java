@@ -41,6 +41,7 @@ public class RestaurantController {
                         .build());
 
         URI location = new URI("/restaurants/" + restaurant.getId());
+
         return ResponseEntity.created(location).body("{}");
     }
 
