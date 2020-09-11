@@ -1,1 +1,1 @@
-# Springboot_shoppingmall_program
+# 스프링부트 실습 - 레스토랑예약시스템
