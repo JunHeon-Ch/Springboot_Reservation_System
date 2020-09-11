@@ -22,11 +22,13 @@ public class Review {
     @Setter
     private Long id;
 
+    @Setter
+    private Long restaurantId;
+
     @NotEmpty
     private String name;
 
-    @Min(0)
-    @Max(5)
+    @NotNull
     private Integer score;
 
     @NotEmpty

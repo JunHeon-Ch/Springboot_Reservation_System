@@ -8,14 +8,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReviewService {
 
-    @Autowired
     private final ReviewRepository reviewRepository;
 
+    @Autowired
     public ReviewService(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
 
-    public Review addReview(Review review) {
+    public Review addReview(Long restaurantId, Review review) {
+        review.setRestaurantId(restaurantId);
         return reviewRepository.save(review);
     }
 }

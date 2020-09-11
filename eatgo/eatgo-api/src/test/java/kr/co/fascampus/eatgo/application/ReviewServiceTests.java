@@ -35,7 +35,7 @@ public class ReviewServiceTests {
                 .description("ads")
                 .build();
 
-        reviewService.addReview(review);
+        reviewService.addReview(1004L, review);
 
         verify(reviewRepository).save(any());
     }
