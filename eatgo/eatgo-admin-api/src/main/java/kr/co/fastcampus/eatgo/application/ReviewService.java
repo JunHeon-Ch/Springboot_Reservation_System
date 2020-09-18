@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class ReviewService {
 
-    private final ReviewRepository reviewRepository;
+    private ReviewRepository reviewRepository;
 
     @Autowired
     public ReviewService(ReviewRepository reviewRepository) {
