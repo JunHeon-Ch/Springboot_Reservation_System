@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +18,6 @@ public class User {
 
     @Id
     @GeneratedValue
-    @Setter
     private Long id;
 
     @NotEmpty
