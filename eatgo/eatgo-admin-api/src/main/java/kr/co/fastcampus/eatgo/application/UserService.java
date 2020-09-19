@@ -5,7 +5,6 @@ import kr.co.fastcampus.eatgo.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,6 +36,13 @@ public class UserService {
         user.setEmail(email);
         user.setName(name);
         user.setLevel(level);
+
+        return user;
+    }
+
+    public User deactiveUser(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        user.deactivate();
 
         return user;
     }
