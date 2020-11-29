@@ -40,4 +40,10 @@ public class User {
     public void deactivate() {
         level = 0L;
     }
+
+    public void updateInformation(String email, String name, Long level) {
+        this.email = email;
+        this.name = name;
+        this.level = level;
+    }
 }

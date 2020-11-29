@@ -24,7 +24,7 @@ public class UserService {
     }
 
     public User addUser(String email, String name) {
-        User user = User.builder().email(email).name(name).build();
+        User user = User.builder().email(email).name(name).level(1L).build();
 
         return userRepository.save(user);
     }
@@ -33,9 +33,7 @@ public class UserService {
         //TODO: 예외처리
         User user = userRepository.findById(id).orElse(null);
 
-        user.setEmail(email);
-        user.setName(name);
-        user.setLevel(level);
+        user.updateInformation(email, name, level);
 
         return user;
     }

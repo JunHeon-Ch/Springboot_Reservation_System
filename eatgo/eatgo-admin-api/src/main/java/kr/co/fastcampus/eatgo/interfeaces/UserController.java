@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -22,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<?> create(@RequestBody User resource) throws URISyntaxException {
+    public ResponseEntity<?> create(@Valid @RequestBody User resource) throws URISyntaxException {
         String email = resource.getEmail();
         String name = resource.getName();
 
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @PatchMapping("/users/{id}")
-    public String update(@PathVariable("id") Long id, @RequestBody User resource) {
+    public String update(@PathVariable("id") Long id, @Valid @RequestBody User resource) {
         String email = resource.getEmail();
         String name = resource.getName();
         Long level = resource.getLevel();

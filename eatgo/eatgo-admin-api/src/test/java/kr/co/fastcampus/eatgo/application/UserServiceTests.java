@@ -66,9 +66,9 @@ public class UserServiceTests {
         Long id = 1004L;
         String email = "admin@example.com";
         String name = "tester";
-        Long level = 100L;
+        Long level = 1L;
 
-        User mockUser = User.builder().id(id).email(email).name("Administrator").build();
+        User mockUser = User.builder().id(id).email(email).name("Administrator").level(100L).build();
         given(userRepository.findById(id)).willReturn(Optional.of(mockUser));
 
         User user = userService.updateUser(id, email, name, level);
@@ -76,7 +76,8 @@ public class UserServiceTests {
         verify(userRepository).findById(eq(id));
 
         assertThat(user.getName(), is("tester"));
-        assertThat(user.isAdmin(), is(true));
+        assertThat(user.isAdmin(), is(false));
+//        assertThat(mockUser.isAdmin(), is(true));
     }
 
     @Test
